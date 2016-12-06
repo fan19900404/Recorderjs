@@ -1,0 +1,18 @@
+<video autoplay id="video"></video>
+<script>
+    var onFailSoHard = function() {
+        alert('设备拒绝访问');
+    };
+    //不使用供应商前缀 
+    navigator.getUserMedia({
+        video: true,
+        audio: true
+    }, function(localMediaStream) {
+        var video = document.getElementById('video');
+        video.src = window.URL.createObjectURL(localMediaStream);
+        //请注意:当使用getUserMedia方法时,在Chrome浏览器中不触发onloadedmetadata事件 
+        video.onloadedmetadata = function(e) {
+            //后续代码略 
+        };
+    }, onFailSoHard);
+</script>
